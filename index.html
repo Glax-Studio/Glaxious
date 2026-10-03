@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<title>Glaxious — Official Game</title>
+<style>
+:root{--bg:#050505;--panel:#0b0b0b;--line:#242424;--text:#f5f5f5;--muted:#9b9b9b;--silver:#d8d8d8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");z-index:20}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;z-index:10;background:linear-gradient(180deg,rgba(5,5,5,.95),rgba(5,5,5,.35));backdrop-filter:blur(14px)}
+.logo{font-weight:900;letter-spacing:.08em;font-size:20px}
+.logo span{color:#888}
+.navlinks{display:flex;gap:30px;color:#aaa;font-size:14px}
+.navlinks a:hover{color:#fff}
+.navbtn{border:1px solid #3a3a3a;border-radius:999px;padding:10px 18px;font-size:13px}
+.hero{min-height:92vh;position:relative;display:flex;align-items:center;padding:130px 7% 80px;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 48%,rgba(255,255,255,.10),transparent 27%),linear-gradient(90deg,#050505 10%,rgba(5,5,5,.76) 48%,rgba(5,5,5,.25));pointer-events:none}
+.scene{position:absolute;inset:0;background:
+linear-gradient(135deg,transparent 45%,rgba(255,255,255,.06) 45.2%,transparent 45.5%),
+radial-gradient(ellipse at 78% 55%,#333 0%,#151515 16%,#080808 45%,#050505 70%);
+}
+.grid{position:absolute;width:70%;height:60%;right:-8%;bottom:-8%;opacity:.2;transform:perspective(500px) rotateX(62deg);background-image:linear-gradient(#777 1px,transparent 1px),linear-gradient(90deg,#777 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(to top,black,transparent)}
+.heroContent{position:relative;z-index:2;max-width:650px}
+.eyebrow{display:inline-flex;gap:9px;align-items:center;border:1px solid #292929;background:#0d0d0d;padding:8px 13px;border-radius:999px;color:#bbb;font-size:12px;margin-bottom:24px}
+.dot{width:6px;height:6px;background:#eee;border-radius:50%;box-shadow:0 0 12px #fff}
+h1{font-size:clamp(64px,11vw,142px);line-height:.82;letter-spacing:-.075em;font-weight:950}
+.subtitle{margin:27px 0 34px;color:#aaa;font-size:17px;line-height:1.7;max-width:540px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.primary{background:#f1f1f1;color:#050505;padding:15px 23px;border-radius:8px;font-weight:800;font-size:14px;transition:.2s}
+.primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px #fff2}
+.secondary{border:1px solid #333;padding:15px 23px;border-radius:8px;color:#ccc;font-weight:700;font-size:14px}
+section{padding:110px 7%;position:relative}
+.sectionHead{max-width:650px;margin-bottom:45px}
+.kicker{color:#777;text-transform:uppercase;letter-spacing:.18em;font-size:11px;margin-bottom:12px}
+h2{font-size:clamp(36px,6vw,72px);letter-spacing:-.05em;line-height:1}
+.sectionHead p{color:#888;line-height:1.7;margin-top:18px}
+.downloadGrid{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}
+.card{background:linear-gradient(145deg,#111,#080808);border:1px solid #252525;border-radius:20px;padding:30px;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;width:220px;height:220px;right:-90px;top:-100px;background:#fff;filter:blur(90px);opacity:.06}
+.platform{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.icon{width:52px;height:52px;border:1px solid #333;border-radius:13px;display:grid;place-items:center;font-weight:900;font-size:22px}
+.card h3{font-size:25px;margin:20px 0 8px}
+.card p{color:#888;line-height:1.6;font-size:14px}
+.download{display:inline-block;margin-top:25px;background:#eee;color:#050505;padding:13px 18px;border-radius:8px;font-weight:800;font-size:13px}
+.coming{display:inline-block;margin-top:25px;padding:13px 18px;border-radius:8px;border:1px solid #292929;color:#666;background:#0a0a0a;font-weight:800;font-size:13px;cursor:not-allowed}
+.meta{display:flex;gap:18px;margin-top:25px;padding-top:20px;border-top:1px solid #202020;color:#666;font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+.featureGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.feature{min-height:180px;border:1px solid #202020;background:#090909;border-radius:16px;padding:24px}
+.feature b{font-size:12px;color:#666;letter-spacing:.15em}
+.feature h3{margin:35px 0 10px;font-size:21px}
+.feature p{color:#777;font-size:13px;line-height:1.6}
+footer{border-top:1px solid #191919;padding:35px 7%;display:flex;justify-content:space-between;color:#666;font-size:12px}
+@media(max-width:760px){
+nav{height:64px;padding:0 5%}.navlinks{display:none}.hero{min-height:85vh;padding:115px 6% 70px}.hero:after{background:linear-gradient(90deg,#050505 15%,rgba(5,5,5,.65),#050505)}
+h1{font-size:72px}.subtitle{font-size:15px}.downloadGrid,.featureGrid{grid-template-columns:1fr}section{padding:75px 6%}.card{padding:24px}
+footer{padding:28px 6%;flex-direction:column;gap:10px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#">GLAX<span>IOUS</span></a>
+  <div class="navlinks"><a href="#game">Game</a><a href="#features">Features</a><a href="#download">Download</a></div>
+  <a class="navbtn" href="#download">Get Glaxious</a>
+</nav>
+
+<header class="hero" id="game">
+  <div class="scene"></div><div class="grid"></div>
+  <div class="heroContent">
+    <div class="eyebrow"><i class="dot"></i> OFFICIAL GAME · V1.0</div>
+    <h1>GLAXIOUS</h1>
+    <p class="subtitle">Enter the world of Glaxious — a cinematic game experience built around atmosphere, mystery and action.</p>
+    <div class="actions">
+      <a class="primary" href="#download">DOWNLOAD V1.0</a>
+      <a class="secondary" href="#features">EXPLORE GAME</a>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="sectionHead">
+    <div class="kicker">The experience</div>
+    <h2>Built for the moment.</h2>
+    <p>Glaxious is designed to feel focused, cinematic and immersive from the first frame to the final encounter.</p>
+  </div>
+  <div class="featureGrid">
+    <div class="feature"><b>01 / ATMOSPHERE</b><h3>A world with a pulse.</h3><p>Dark environments, dramatic lighting and a focused visual identity create the tone of Glaxious.</p></div>
+    <div class="feature"><b>02 / ACTION</b><h3>Stay alert.</h3><p>Move through the world, uncover what is happening and react to the threats around you.</p></div>
+    <div class="feature"><b>03 / STORY</b><h3>Something is waiting.</h3><p>Follow the trail, discover the mystery and see where the Glaxious experience takes you.</p></div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="sectionHead">
+    <div class="kicker">Download</div>
+    <h2>Choose your platform.</h2>
+    <p>Windows is available now. The Android version will appear here when it is ready.</p>
+  </div>
+  <div class="downloadGrid">
+    <div class="card">
+      <div class="platform"><div class="icon">⊞</div><span style="color:#777;font-size:11px;letter-spacing:.12em">AVAILABLE NOW</span></div>
+      <h3>Windows</h3>
+      <p>Download Glaxious V1.0 for Windows through the official file host.</p>
+      <a class="download" href="https://www.mediafire.com/file/noojukpzvsfqfxs/glaxiousv1.0.exe/file" target="_blank" rel="noopener">DOWNLOAD FOR WINDOWS →</a>
+      <div class="meta"><span>V1.0</span><span>EXE</span><span>MEDIAFIRE</span></div>
+    </div>
+    <div class="card">
+      <div class="platform"><div class="icon">▣</div><span style="color:#555;font-size:11px;letter-spacing:.12em">NOT AVAILABLE</span></div>
+      <h3>Android</h3>
+      <p>The Android build is currently in development. This card is intentionally disabled.</p>
+      <span class="coming" aria-disabled="true">COMING SOON</span>
+      <div class="meta"><span>ANDROID</span><span>IN DEVELOPMENT</span></div>
+    </div>
+  </div>
+</section>
+
+<footer><span>© 2026 Glaxious</span><span>Built by Glax Studio</span></footer>
+</body>
+</html>
